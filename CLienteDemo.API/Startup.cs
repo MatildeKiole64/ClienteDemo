@@ -1,18 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ClienteDemo.Api.Extensions;
+using ClienteDemo.Application;
+using ClienteDemo.Core.Gateways;
+using ClienteDemo.Core.UseCases;
+using ClienteDemo.Infrastucture.Repositorios;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 
-namespace CLienteDemo.API
+namespace ClienteDemo.Api
 {
     public class Startup
     {
@@ -26,12 +23,15 @@ namespace CLienteDemo.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.ConfigureCors();
+            services.ConfigureIISIntegration();
+            services.ConfigureSqlContext(Configuration);
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CLienteDemo.API", Version = "v1" });
-            });
+            services.AddControllersWithViews();
+            services.ConfigureSwagger();
+            services.AddControllersWithViews();
+            services.AddScoped<ICliente_UseCase, Cliente_Service>();
+            services.AddScoped<ICliente_Gateway, Cliente_Repositorio>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,11 +40,23 @@ namespace CLienteDemo.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CLienteDemo.API v1"));
             }
-
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
             app.UseHttpsRedirection();
+            app.UseCors("CorsPolicy");
+            app.UseStaticFiles();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(s =>
+            {
+                s.SwaggerEndpoint("/swagger/v0.15/swagger.json/", "ClienteDemoAPI");
+                s.RoutePrefix = string.Empty;
+            });
 
             app.UseRouting();
 
@@ -52,7 +64,9 @@ namespace CLienteDemo.API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

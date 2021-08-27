@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "ClienteDemo.Application/1.0.0": {
+        "dependencies": {
+          "ClienteDemo.Core": "1.0.0"
+        },
+        "runtime": {
+          "ClienteDemo.Application.dll": {}
+        }
+      },
+      "ClienteDemo.Core/1.0.0": {
+        "runtime": {
+          "ClienteDemo.Core.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ClienteDemo.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ClienteDemo.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

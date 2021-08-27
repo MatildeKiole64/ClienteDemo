@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "ClienteDemo.Core/1.0.0": {
+        "runtime": {
+          "ClienteDemo.Core.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ClienteDemo.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
