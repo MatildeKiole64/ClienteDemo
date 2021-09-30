@@ -6,6 +6,7 @@ using ClienteDemo.Core.Helpers;
 using ClienteDemo.Core.Gateways;
 using ClienteDemo.Core.UseCases;
 using ClienteDemo.Core.Entidades;
+using ClienteDemo.Infrastucture.Models;
 
 namespace ClienteDemo.Application
 {
@@ -25,7 +26,9 @@ namespace ClienteDemo.Application
 
             try
             {
-                await repo.Create(request.Cliente, request.Nome);
+                request.MapTo<Cliente>
+
+                await repo.Create(request);
 
                 ok = true;
             }
@@ -42,11 +45,11 @@ namespace ClienteDemo.Application
             return response;
         }
 
-        public async Task<DeleteCliente_Res> DeleteCliente(DeleteCliente_Req request)
+        public async Task<RemoveCliente_Res> DeleteCliente(RemoveCliente_Req request)
         {
             bool ok = false;
             string msg = string.Empty;
-            DeleteCliente_Res response = null;
+            RemoveCliente_Res response = null;
 
             try
             {
@@ -69,7 +72,7 @@ namespace ClienteDemo.Application
             }
             finally
             {
-                response = new DeleteCliente_Res(msg, ok);
+                response = new RemoveCliente_Res(msg, ok);
             }
 
             return response;

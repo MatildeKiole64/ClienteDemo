@@ -1595,7 +1595,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
-          "ClienteDemo.Core": "1.0.0"
+          "ClienteDemo.Core": "1.0.0",
+          "ClienteDemo.Infrastructure": "1.0.0"
         },
         "compile": {
           "bin/placeholder/ClienteDemo.Application.dll": {}

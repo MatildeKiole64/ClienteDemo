@@ -21,7 +21,7 @@ namespace ClienteDemo.Api.Areas.Controllers
         [Route("create/")]
         public async Task<IActionResult> Create(CreateViewModel viewModel)
         {
-            var request = new CreateCliente_Req(viewModel.Cliente, viewModel.Nome);
+            var request = new CreateCliente_Req(viewModel);
 
             var response = await cliente_useCase.CreateCliente(request);
 

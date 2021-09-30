@@ -127,6 +127,9 @@
             "projectReferences": {
               "C:\\Users\\Anderson M Kiole\\Documents\\ALKiole Projectos\\ClienteDemo\\ClienteDemo.Core\\ClienteDemo.Core.csproj": {
                 "projectPath": "C:\\Users\\Anderson M Kiole\\Documents\\ALKiole Projectos\\ClienteDemo\\ClienteDemo.Core\\ClienteDemo.Core.csproj"
+              },
+              "C:\\Users\\Anderson M Kiole\\Documents\\ALKiole Projectos\\ClienteDemo\\ClienteDemo.Infrastucture\\ClienteDemo.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Anderson M Kiole\\Documents\\ALKiole Projectos\\ClienteDemo\\ClienteDemo.Infrastucture\\ClienteDemo.Infrastructure.csproj"
               }
             }
           }
