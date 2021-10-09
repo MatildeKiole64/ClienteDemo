@@ -1,5 +1,4 @@
 ﻿using ClienteDemo.Core.Helpers;
-using ClienteDemo.Core.Entidades;
 
 namespace ClienteDemo.Core.DTOs
 {
@@ -7,8 +6,8 @@ namespace ClienteDemo.Core.DTOs
     {
         public bool Ok;
         public string Msg;
-        public DataCollection<ICliente> Clientes;
-        public GetClientes_Res(DataCollection<ICliente> clientes, string msg, bool ok)
+        public DataCollection<CreateCliente_Req> Clientes;
+        public GetClientes_Res(DataCollection<CreateCliente_Req> clientes, string msg, bool ok)
         {
             Ok = ok;
             Msg = msg;

@@ -1,9 +1,8 @@
-using ClienteDemo.Core.Entidades;
-
 namespace ClienteDemo.Core.DTOs
 {
-    public class CreateCliente_Req
+    public record CreateCliente_Req
     {
-        public ICliente Cliente { get; set; }
+        public string Cliente { get; set; }
+        public string Nome { get; set; }
     }
 }

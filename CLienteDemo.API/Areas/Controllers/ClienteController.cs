@@ -1,9 +1,7 @@
-﻿using ClienteDemo.Api.Models;
-using ClienteDemo.Core.DTOs;
+﻿using ClienteDemo.Core.DTOs;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ClienteDemo.Core.UseCases;
-using ClienteDemo.Core.Entidades;
 
 namespace ClienteDemo.Api.Areas.Controllers
 {
@@ -19,10 +17,8 @@ namespace ClienteDemo.Api.Areas.Controllers
 
         [HttpPost]
         [Route("create/")]
-        public async Task<IActionResult> Create(CreateViewModel viewModel)
+        public async Task<IActionResult> Create(CreateCliente_Req request)
         {
-            var request = new CreateCliente_Req(viewModel);
-
             var response = await cliente_useCase.CreateCliente(request);
 
             return response.Ok ? Ok(response.Msg) : BadRequest(response.Msg);
@@ -30,33 +26,27 @@ namespace ClienteDemo.Api.Areas.Controllers
 
         [HttpPut]
         [Route("update/")]
-        public async Task<IActionResult> Update(UpdateViewModel viewModel)
+        public async Task<IActionResult> Update(UpdateCliente_Req request)
         {
-            var request = new UpdateCliente_Req(viewModel);
-
             var response = await cliente_useCase.UpdateCliente(request);
 
             return response.Ok ? Ok(response) : BadRequest(response.Msg);
         }
 
         [HttpDelete]
-        [Route("delete/{cliente}")]
-        public async Task<IActionResult> Delete(string cliente)
+        [Route("delete/{id}")]
+        public async Task<IActionResult> Remove(RemoveCliente_Req request)
         {
-            var request = new DeleteCliente_Req(cliente);
-
-            var response = await cliente_useCase.DeleteCliente(request);
+            var response = await cliente_useCase.RemoveCliente(request);
 
             return response.Ok ? Ok(response) : BadRequest(response.Msg);
         }
 
         [HttpGet]
         [Route("clientes/")]
-        public async Task<IActionResult> GetClientes(int page, int take)
+        public IActionResult GetClientes(GetClientes_Req request)
         {
-            var request = new GetClientes_Req(page, take);
-
-            var response = await cliente_useCase.GetClientes(request);
+            var response = cliente_useCase.GetClientes(request);
 
             return response.Ok ? Ok(response) : BadRequest(response.Msg);
         }

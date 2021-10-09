@@ -1,10 +1,10 @@
 ﻿namespace ClienteDemo.Core.DTOs
 {
-    public class DeleteCliente_Res
+    public class RemoveCliente_Res
     {
         public bool Ok;
         public string Msg;
-        public DeleteCliente_Res(string msg, bool ok)
+        public RemoveCliente_Res(string msg, bool ok)
         {
             Ok = ok;
             Msg = msg;

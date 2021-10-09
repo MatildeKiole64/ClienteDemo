@@ -1,4 +1,5 @@
 ﻿using ClienteDemo.Infrastucture;
+using ClienteDemo.Infrastucture.Repositorios;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

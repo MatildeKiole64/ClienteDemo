@@ -1,19 +1,20 @@
 ﻿
 using System;
+using System.Linq;
 using ClienteDemo.Core.DTOs;
 using System.Threading.Tasks;
 using ClienteDemo.Core.Helpers;
-using ClienteDemo.Core.Gateways;
-using ClienteDemo.Core.UseCases;
-using ClienteDemo.Core.Entidades;
+using Microsoft.EntityFrameworkCore;
 using ClienteDemo.Infrastucture.Models;
+using ClienteDemo.Infrastucture.Repositorios;
+using ClienteDemo.Core.UseCases;
 
 namespace ClienteDemo.Application
 {
-    public class Cliente_Service : ICliente_UseCase
+    public class Cliente_Service: ICliente_UseCase
     {
-        private readonly ICliente_Gateway repo;
-        public Cliente_Service(ICliente_Gateway repo)
+        private readonly DataContext repo;
+        public Cliente_Service(DataContext repo)
         {
             this.repo = repo;
         }
@@ -26,9 +27,10 @@ namespace ClienteDemo.Application
 
             try
             {
-                request.MapTo<Cliente>
+                var cliente = request.MapTo<Cliente>();
 
-                await repo.Create(request);
+                await repo.AddAsync(cliente);
+                await repo.SaveChangesAsync();
 
                 ok = true;
             }
@@ -45,7 +47,7 @@ namespace ClienteDemo.Application
             return response;
         }
 
-        public async Task<RemoveCliente_Res> DeleteCliente(RemoveCliente_Req request)
+        public async Task<RemoveCliente_Res> RemoveCliente(RemoveCliente_Req request)
         {
             bool ok = false;
             string msg = string.Empty;
@@ -53,14 +55,16 @@ namespace ClienteDemo.Application
 
             try
             {
-                ICliente cliente = await repo.GetCliente(request.Cliente);
+                var cliente = await repo.Clientes.FindAsync(request.Id);
 
-                if (cliente is null || cliente.isDeleted)
+                if (cliente is null || !cliente.IsActive)
                 {
                     throw new Exception("Cliente doesn't exist");
                 }
 
-                await repo.Remove(cliente);
+                cliente.IsActive = false;
+                repo.Clientes.Update(cliente);
+                await repo.SaveChangesAsync();
 
                 ok = true;
 
@@ -78,16 +82,20 @@ namespace ClienteDemo.Application
             return response;
         }
 
-        public async Task<GetClientes_Res> GetClientes(GetClientes_Req request)
+        public GetClientes_Res GetClientes(GetClientes_Req request)
         {
             bool ok = false;
             string msg = string.Empty;
-            DataCollection<ICliente> clientes = null;
+            DataCollection<CreateCliente_Req> clientes = null;
             GetClientes_Res response = null;
 
             try
             {
-                clientes = await repo.GetClientes(request.Page, request.Take);
+                var query = repo.Clientes.AsQueryable().AsNoTracking();
+                clientes = query.OrderBy(c => c.Nome)
+                                .Paging(request.Page, request.Take)
+                                .MapTo<DataCollection<CreateCliente_Req>>();
+
                 ok = true;
             }
             catch (Exception ex)
@@ -112,14 +120,18 @@ namespace ClienteDemo.Application
 
             try
             {
-                ICliente cliente = await repo.GetCliente(request.Cliente.Cliente);
+                var cliente = await repo.Clientes.FirstOrDefaultAsync(c => c.Id == request.Id);
 
-                if (cliente is not null || cliente.isDeleted)
+                if (cliente is not null || !cliente.IsActive)
                 {
                     throw new Exception("Cliente doesn't exist");
                 }
 
-                await repo.UpdateCliente(cliente);
+                cliente.Nome = request.Nome;
+
+                repo.Clientes.Update(cliente);
+
+                await repo.SaveChangesAsync();
 
                 ok = true;
             }

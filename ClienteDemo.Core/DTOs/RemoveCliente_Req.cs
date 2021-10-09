@@ -1,11 +1,9 @@
-﻿namespace ClienteDemo.Core.DTOs
+﻿using System;
+
+namespace ClienteDemo.Core.DTOs
 {
-    public class DeleteCliente_Req
+    public record RemoveCliente_Req
     {
-        public string Cliente;
-        public DeleteCliente_Req(string cliente)
-        {
-            Cliente = cliente;
-        }
+        public Guid Id { get; set; }
     }
 }

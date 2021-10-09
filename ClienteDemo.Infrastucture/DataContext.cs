@@ -1,20 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ClienteDemo.Infrastucture.Models;
+﻿using ClienteDemo.Infrastucture.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace ClienteDemo.Infrastucture
+namespace ClienteDemo.Infrastucture.Repositorios
 {
-    public class DataContext: DbContext
+    public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options): base(options)
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
         }
 
-        public DbSet<ClienteModel> Clientes { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
 
-        protected override  void OnModelCreating(ModelBuilder builder) 
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<ClienteModel>().HasIndex(c => c.Cliente).IsUnique();
+            builder.Entity<Cliente>().HasIndex(c => c.Codigo).IsUnique();
         }
     }
 }

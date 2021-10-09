@@ -1,13 +1,12 @@
-﻿using ClienteDemo.Core.Entidades;
+﻿using System;
 
 namespace ClienteDemo.Core.DTOs
 {
     public class UpdateCliente_Req
     {
-        public ICliente Cliente;
-        public UpdateCliente_Req(ICliente cliente)
-        {
-            Cliente = cliente;
-        }
+        public Guid Id { get; set; }
+        public string Nome { get; set; }
+        public string Cliente { get; set; }
+
     }
 }

@@ -1385,7 +1385,8 @@
       },
       "ClienteDemo.Application/1.0.0": {
         "dependencies": {
-          "ClienteDemo.Core": "1.0.0"
+          "ClienteDemo.Core": "1.0.0",
+          "ClienteDemo.Infrastructure": "1.0.0"
         },
         "runtime": {
           "ClienteDemo.Application.dll": {}

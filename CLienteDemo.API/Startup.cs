@@ -1,8 +1,6 @@
 using ClienteDemo.Api.Extensions;
 using ClienteDemo.Application;
-using ClienteDemo.Core.Gateways;
 using ClienteDemo.Core.UseCases;
-using ClienteDemo.Infrastucture.Repositorios;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -31,7 +29,7 @@ namespace ClienteDemo.Api
             services.ConfigureSwagger();
             services.AddControllersWithViews();
             services.AddScoped<ICliente_UseCase, Cliente_Service>();
-            services.AddScoped<ICliente_Gateway, Cliente_Repositorio>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

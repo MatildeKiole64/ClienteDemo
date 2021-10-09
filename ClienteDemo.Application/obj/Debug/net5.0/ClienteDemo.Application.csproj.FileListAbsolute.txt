@@ -13,3 +13,5 @@ C:\Users\Anderson M Kiole\Documents\ALKiole Projectos\ClienteDemo\ClienteDemo.Ap
 C:\Users\Anderson M Kiole\Documents\ALKiole Projectos\ClienteDemo\ClienteDemo.Application\obj\Debug\net5.0\ClienteDemo.Application.dll
 C:\Users\Anderson M Kiole\Documents\ALKiole Projectos\ClienteDemo\ClienteDemo.Application\obj\Debug\net5.0\ref\ClienteDemo.Application.dll
 C:\Users\Anderson M Kiole\Documents\ALKiole Projectos\ClienteDemo\ClienteDemo.Application\obj\Debug\net5.0\ClienteDemo.Application.pdb
+C:\Users\Anderson M Kiole\Documents\ALKiole Projectos\ClienteDemo\ClienteDemo.Application\bin\Debug\net5.0\ClienteDemo.Infrastructure.dll
+C:\Users\Anderson M Kiole\Documents\ALKiole Projectos\ClienteDemo\ClienteDemo.Application\bin\Debug\net5.0\ClienteDemo.Infrastructure.pdb
